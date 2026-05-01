@@ -17,11 +17,44 @@
         }
     </style>
 </head>
+
+<script>
+  const targetDate = new Date("2026-06-27T17:00:00").getTime();
+
+  const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      clearInterval(timer);
+      document.getElementById("timer").innerHTML = "C'est le grand jour 🎉";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+  }, 1000);
+</script>
+
 <body class="font-serif ">
     <!-- Hero Section -->
     <section class="hero-section min-h-screen flex flex-col justify-center items-center text-white text-center px-4">
         <h1 class="text-5xl md:text-7xl font-bold mb-6">Mariage de Juliette et Antoine</h1>
         <p class="text-2xl md:text-3xl mb-8">Samedi 27 Juin 2026</p>
+        <!-- Compte à rebours -->
+        <div id="timer" class="flex space-x-6 text-xl md:text-2xl mb-10">
+            <div><span id="days" class="font-bold"></span><br>jours</div>
+            <div><span id="hours" class="font-bold"></span><br>heures</div>
+            <div><span id="minutes" class="font-bold"></span><br>minutes</div>
+            <div><span id="seconds" class="font-bold"></span><br>secondes</div>
+        </div>
         <div class="flex space-x-4">
             <a href="#reception" class="px-6 py-3 bg-white text-green-600 rounded-full font-medium hover:bg-green-100 transition">Informations</a>
             <a href="#loger" class="px-6 py-3 border-2 border-white text-white rounded-full font-medium hover:bg-white hover:text-green-600 transition">Se loger</a>
